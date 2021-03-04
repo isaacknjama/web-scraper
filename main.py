@@ -1,3 +1,5 @@
+import time
+
 from bs4 import BeautifulSoup
 import requests
 
@@ -5,7 +7,7 @@ url = requests.get('https://www.jumia.co.ke/laptops/').text
 soup = BeautifulSoup(url, 'lxml')
 products = soup.find_all('article', class_='prd _fb col c-prd')
 
-for product in products:
+for i, product in enumerate(products):
     prod_description = product.find('h3', class_='name').text
     current_price = product.find('div', class_='prc').text
     old_price = product.find('div', class_='old').text
@@ -20,3 +22,5 @@ for product in products:
     Rating: {rating}
     '''
           )
+
+
